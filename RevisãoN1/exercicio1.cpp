@@ -1,6 +1,7 @@
 //Escreva um algoritimo que solicite 5 nomes e os exiba em lista na tela
 //Apos exibir a lista de nomes exiba novamente em ordem inversa
 #include <iostream>
+#include  <string>
 using namespace std;
 
 int main(){
@@ -10,7 +11,7 @@ int main(){
     for (int i=0;i<tamanhoLista;i++)
     {
         cout << "Digite um nome para entrar na lista: ";
-        cin >> names[i];
+        getline(cin, names[i]);
     }
 
     cout << "Imprimindo a lista de nomes" << endl;

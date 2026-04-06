@@ -20,7 +20,7 @@ o 2, 3, 4 e 6*/
 
 using namespace std;
 
-const int MAX_ALUNOS = 10;
+const int MAX_ALUNOS = 100;
 string nomes[MAX_ALUNOS];
 float notas[MAX_ALUNOS][4];
 int total_alunos = 0;
@@ -42,13 +42,13 @@ void salvarRegistro()
             arquivo << endl;
         }
         arquivo.close();
-        cout << "Registros salvos com sucesso no arquivo 'alunos.txt'!" << endl;
+        cout << endl << "Registros salvos com sucesso no arquivo 'alunos.txt'!" << endl;
     }
     else
     {
         cout << "Erro ao abrir o arquivo para salvar os registros." << endl;
     }
-}
+} 
 
 void carregarRegistro()
 {
@@ -56,14 +56,17 @@ void carregarRegistro()
 
     if (arquivo.is_open())
     {
-        arquivo >> total_alunos; // Lê o número total de alunos da primeira linha
+        arquivo >> total_alunos;
+        arquivo.ignore();
+
         for (int i = 0; i < total_alunos; i++)
         {
-            arquivo >> nomes[i];
+            getline(arquivo, nomes[i]);
             for (int j = 0; j < 4; j++)
             {
                 arquivo >> notas[i][j];
             }
+            arquivo.ignore();
         }
         arquivo.close();
         cout << "Registros carregados com sucesso do arquivo 'alunos.txt'!" << endl;
@@ -82,7 +85,8 @@ void cadastrarAluno()
     }
 
     cout << "Digite o nome do aluno: ";
-    cin >> nomes[total_alunos];
+    cin.ignore();
+    getline(cin, nomes[total_alunos]);
 
     for (int i = 0; i < 4; i++) {
         cout << "Digite a nota " << (i + 1) << " do aluno: ";
@@ -106,8 +110,8 @@ void listarAlunos()
             cout << "Nome: " << nomes[i] << endl;
             for (int j=0; j<4;j++)
             {
-                cout << "N" << (j+1) << ": " << notas[i][j] << endl;
-            }
+                cout << "N" << (j+1) << ": " << notas[i][j] << "\t";
+            }cout << endl << endl;
 
         }
     }
@@ -122,7 +126,8 @@ void alterarAluno()
     {
         string nomeBusca;
         cout << "Digite o nome do aluno que deseja alterar as informações: ";
-        cin >> nomeBusca;
+        cin.ignore();
+        getline(cin, nomeBusca);
         int op = -1;
         bool encontrado = false;
 
@@ -131,6 +136,8 @@ void alterarAluno()
             if (nomes[i] == nomeBusca)
             {
                 encontrado = true;
+                int notaSelecionada;
+                int novaNota;
                 cout << endl << "--Menu de alteração--" << endl;
                 cout << "1 - Alterar nome" << endl;
                 cout << "2 - Alterar notas" << endl;
@@ -140,16 +147,26 @@ void alterarAluno()
                 {
                 case 1:
                     cout << "Digite o novo nome do aluno: ";
-                    cin >> nomes[i];
+                    cin.ignore();
+                    getline(cin, nomes[i]);
                     cout << endl << "Nome alterado com sucesso!!!";
+                    salvarRegistro();
                     break;
                 case 2:
-                    for (int j=0; j<4;j++)
+                    cout << "--Seleção de Notas--" << endl;
+                    cout << "Digite de 1 à 4 qual nota quer alterar: ";
+                    cin >> notaSelecionada;
+                    if (notaSelecionada < 1 || notaSelecionada > 4)
                     {
-                        cout << "Digite a nova nota " << (j+1) << " do aluno: ";
-                        cin >> notas[i][j];
+                        cout << "Valor inválido de nota";
+                    }else
+                    {
+                        cout << "Digite o valor novo da nota: ";
+                        cin >> novaNota;
+                        notas[i][notaSelecionada] = novaNota;
                     }
-                    cout << "Notas alteradas com sucesso";
+                    salvarRegistro();
+
                     break;
                 default:
                     cout << "Opcao invalida!";
@@ -157,7 +174,6 @@ void alterarAluno()
                 }
                 break;
             }
-            salvarRegistro();
         }
 
         if (!encontrado)
@@ -176,7 +192,8 @@ void deletarAluno()
     {
         string nomeBusca;
         cout << "Digite o nome do aluno que deseja deletar: ";
-        cin >> nomeBusca;
+        cin.ignore();
+        getline(cin, nomeBusca);
         bool encontrado = false;
 
         for (int i = 0; i < total_alunos; i++)
@@ -268,7 +285,8 @@ int main()
                 {
                     string nomeBusca;
                     cout << "Digite o nome do aluno: ";
-                    cin >> nomeBusca;
+                    cin.ignore();
+                    getline(cin, nomeBusca);
                     bool encontrado = false;
 
                     for (int i = 0; i < total_alunos; i++)
