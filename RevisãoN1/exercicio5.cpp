@@ -20,7 +20,7 @@ o 2, 3, 4 e 6*/
 
 using namespace std;
 
-const int MAX_ALUNOS = 100;
+const int MAX_ALUNOS = 2;
 string nomes[MAX_ALUNOS];
 float notas[MAX_ALUNOS][4];
 int total_alunos = 0;
