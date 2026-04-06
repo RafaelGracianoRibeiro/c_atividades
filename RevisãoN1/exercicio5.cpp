@@ -57,16 +57,18 @@ void carregarRegistro()
     if (arquivo.is_open())
     {
         arquivo >> total_alunos;
-        arquivo.ignore();
+
+        // Consome o \n que ficou após o numero de alunos
+        string linha_vazia;
+        getline(arquivo, linha_vazia);
 
         for (int i = 0; i < total_alunos; i++)
         {
             getline(arquivo, nomes[i]);
-            for (int j = 0; j < 4; j++)
-            {
+            for (int j = 0; j < 4; j++){
                 arquivo >> notas[i][j];
             }
-            arquivo.ignore();
+            getline(arquivo, linha_vazia); // Consome o \n que ficou após ler as notas para que o proximo getline funcione
         }
         arquivo.close();
         cout << "Registros carregados com sucesso do arquivo 'alunos.txt'!" << endl;
@@ -163,7 +165,7 @@ void alterarAluno()
                     {
                         cout << "Digite o valor novo da nota: ";
                         cin >> novaNota;
-                        notas[i][notaSelecionada] = novaNota;
+                        notas[i][notaSelecionada-1] = novaNota;
                     }
                     salvarRegistro();
 
