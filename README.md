@@ -25,27 +25,6 @@ Pasta com exercícios fundamentais para a primeira avaliação (N1), colocando e
 - **Linguagem:** C++
 - **Ambiente/IDE:** CLion / GCC
 
-## ⚙️ Como executar os projetos
-
-Para compilar e executar qualquer um dos códigos, você precisará de um compilador C++ (como `g++`) instalado em sua máquina.
-
-1. Clone este repositório:
-   ```bash
-   git clone https://github.com/SEU_USUARIO/SEU_REPOSITORIO_AQUI.git
-   ```
-2. Navegue até o diretório do exercício desejado:
-   ```bash
-   cd RevisãoN1
-   ```
-3. Compile o código desejado (exemplo do sistema CRUD):
-   ```bash
-   g++ exercicio5.cpp -o exercicio5
-   ```
-4. Execute o programa:
-   ```bash
-   ./exercicio5
-   ```
-
 ## 👨‍💻 Autor
 
 **Rafael Graciano Ribeiro**  
